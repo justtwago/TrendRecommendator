@@ -1,6 +1,16 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext {
+        versions = [
+                buildTools: "27.0.3",
+                support   : "27.0.2",
+                kotlin    : '1.2.41',
+                dagger    : "2.14.1",
+                retrofit  : "2.3.0",
+                glide     : '4.6.1'
+        ]
+    }
 
     repositories {
         google()
@@ -8,8 +18,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath 'me.tatarka:gradle-retrolambda:3.7.0'
+        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
     }
 }
 
