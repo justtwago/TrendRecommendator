@@ -1,4 +1,4 @@
-package com.example.artyomvlasov.trendrecommendator.ui
+package com.example.artyomvlasov.trendrecommendator.app
 
 import android.app.Activity
 import android.app.Application

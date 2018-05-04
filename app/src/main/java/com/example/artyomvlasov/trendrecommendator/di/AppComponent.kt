@@ -1,7 +1,7 @@
 package com.example.artyomvlasov.trendrecommendator.di
 
 import android.app.Application
-import com.example.artyomvlasov.trendrecommendator.ui.TrendApplication
+import com.example.artyomvlasov.trendrecommendator.app.TrendApplication
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule

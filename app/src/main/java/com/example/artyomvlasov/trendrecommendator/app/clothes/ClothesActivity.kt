@@ -1,9 +1,15 @@
-package com.example.artyomvlasov.trendrecommendator.ui.clothes
+package com.example.artyomvlasov.trendrecommendator.app.clothes
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.view.MenuItem
 import com.example.artyomvlasov.trendrecommendator.R
+import com.example.artyomvlasov.trendrecommendator.app.main.MainActivity
+import com.example.artyomvlasov.trendrecommendator.app.utils.Constatns.CATEGORY_KEY
+import com.example.artyomvlasov.trendrecommendator.app.utils.Constatns.COLOR_KEY
 import com.example.artyomvlasov.trendrecommendator.repositories.ClothesRepository
 import dagger.android.AndroidInjection
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,23 +20,45 @@ import kotlinx.android.synthetic.main.activity_clothes.*
 import javax.inject.Inject
 
 class ClothesActivity : AppCompatActivity() {
-    @Inject
-    lateinit var clothesRepository: ClothesRepository
-
     private var disposable: Disposable? = null
     private val clothesAdapter by lazy { ClothesAdapter(emptyList()) }
+    private val color by lazy { intent.getStringExtra(COLOR_KEY) }
+    private val category by lazy { intent.getStringExtra(CATEGORY_KEY) }
+
+    @Inject
+    lateinit var clothesRepository: ClothesRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_clothes)
 
+        setupToolbar()
         setupRecyclerView()
         inflateClothes()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        android.R.id.home -> openMainActivity()
+        else -> super.onOptionsItemSelected(item)
+    }
+
+
+    private fun openMainActivity(): Boolean {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        return true
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
     private fun inflateClothes() {
-        disposable = clothesRepository.getClothes("red", "dress")
+        disposable = clothesRepository.getClothes(color, category)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(
@@ -45,7 +73,12 @@ class ClothesActivity : AppCompatActivity() {
         with(clothesRecyclerView) {
             adapter = clothesAdapter
             layoutManager = LinearLayoutManager(this@ClothesActivity)
+            addItemDecoration(DividerItemDecoration(this@ClothesActivity, DividerItemDecoration.VERTICAL))
         }
+    }
+
+    override fun onBackPressed() {
+        openMainActivity()
     }
 
     override fun onDestroy() {

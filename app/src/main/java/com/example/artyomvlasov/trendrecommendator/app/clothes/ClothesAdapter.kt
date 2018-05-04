@@ -1,12 +1,14 @@
-package com.example.artyomvlasov.trendrecommendator.ui.clothes
+package com.example.artyomvlasov.trendrecommendator.app.clothes
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.artyomvlasov.trendrecommendator.R
 import com.example.artyomvlasov.trendrecommendator.data.ClothesItem
-import com.example.artyomvlasov.trendrecommendator.ui.clothes.ClothesAdapter.ViewHolder
+import com.example.artyomvlasov.trendrecommendator.app.clothes.ClothesAdapter.ViewHolder
 import kotlinx.android.synthetic.main.item_clothes.view.*
 
 
@@ -28,7 +30,11 @@ class ClothesAdapter(private var items: List<ClothesItem>) : RecyclerView.Adapte
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(clothesItem: ClothesItem) {
             itemView.clothesName.text = clothesItem.name
-            itemView.clothesDescription.text = clothesItem.description
+            Glide.with(itemView.clothesIcon)
+                    .load(clothesItem.image.sizes.thumb.url)
+                    .apply(RequestOptions
+                            .placeholderOf(R.drawable.bowtie))
+                    .into(itemView.clothesIcon)
         }
     }
 }

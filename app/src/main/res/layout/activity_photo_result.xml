@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/moccasin"
-    tools:context="com.example.artyomvlasov.trendrecommendator.ui.photo.PhotoResultActivity">
+    tools:context="com.example.artyomvlasov.trendrecommendator.app.photo.PhotoResultActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_top"

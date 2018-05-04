@@ -1,4 +1,4 @@
-package com.example.artyomvlasov.trendrecommendator.ui.main
+package com.example.artyomvlasov.trendrecommendator.app.main
 
 import android.app.Activity
 import android.content.Intent
@@ -6,7 +6,7 @@ import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.artyomvlasov.trendrecommendator.R
-import com.example.artyomvlasov.trendrecommendator.ui.photo.PhotoResultActivity
+import com.example.artyomvlasov.trendrecommendator.app.photo.PhotoResultActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val REQUEST_IMAGE_CAPTURE = 1
