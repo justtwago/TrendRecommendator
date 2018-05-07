@@ -9,11 +9,10 @@ import android.support.v7.graphics.Palette
 
 import com.example.artyomvlasov.trendrecommendator.util.ColorUtils
 import com.example.artyomvlasov.trendrecommendator.R
-import com.example.artyomvlasov.trendrecommendator.app.clothes.ClothesActivity
+import com.example.artyomvlasov.trendrecommendator.app.clothes.main.ClothesActivity
 import com.example.artyomvlasov.trendrecommendator.app.utils.Category
-import com.example.artyomvlasov.trendrecommendator.app.utils.Constatns.CATEGORY_KEY
-import com.example.artyomvlasov.trendrecommendator.app.utils.Constatns.COLOR_KEY
-import com.github.zagum.switchicon.SwitchIconView
+import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.CATEGORY_KEY
+import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.COLOR_KEY
 import kotlinx.android.synthetic.main.activity_photo_result.*
 
 class PhotoResultActivity : AppCompatActivity() {

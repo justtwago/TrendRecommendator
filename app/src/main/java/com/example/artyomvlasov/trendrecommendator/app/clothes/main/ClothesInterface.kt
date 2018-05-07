@@ -1,4 +1,4 @@
-package com.example.artyomvlasov.trendrecommendator.app.clothes
+package com.example.artyomvlasov.trendrecommendator.app.clothes.main
 
 import com.example.artyomvlasov.trendrecommendator.data.ClothesItem
 

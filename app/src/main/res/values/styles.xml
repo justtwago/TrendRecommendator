@@ -5,18 +5,22 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/white</item>
     </style>
 
     <style name="ClothesNameStyle">
-        <item name="android:textSize">@dimen/text_size_large</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/moccasin</item>
     </style>
-
 
     <style name="TextStyle">
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="TextDetailsStyle">
+        <item name="android:textColor">@color/moccasin</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>

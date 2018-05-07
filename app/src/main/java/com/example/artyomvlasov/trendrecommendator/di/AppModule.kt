@@ -3,8 +3,8 @@ package com.example.artyomvlasov.trendrecommendator.di
 import android.app.Application
 import android.content.Context
 import com.example.artyomvlasov.trendrecommendator.BuildConfig
-import com.example.artyomvlasov.trendrecommendator.app.clothes.ClothesInterface
-import com.example.artyomvlasov.trendrecommendator.app.clothes.ClothesPresenter
+import com.example.artyomvlasov.trendrecommendator.app.clothes.main.ClothesInterface
+import com.example.artyomvlasov.trendrecommendator.app.clothes.main.ClothesPresenter
 import com.example.artyomvlasov.trendrecommendator.repositories.ClothesRepository
 import com.example.artyomvlasov.trendrecommendator.repositories.ClothesRepositoryImpl
 import com.example.artyomvlasov.trendrecommendator.services.ClothesService

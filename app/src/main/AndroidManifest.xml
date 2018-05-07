@@ -26,7 +26,9 @@
         </activity>
         <activity android:name=".app.photo.PhotoResultActivity">
         </activity>
-        <activity android:name=".app.clothes.ClothesActivity">
+        <activity android:name=".app.clothes.main.ClothesActivity">
+        </activity>
+        <activity android:name=".app.clothes.details.ClothesDetailsActivity">
         </activity>
     </application>
 
