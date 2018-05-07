@@ -11,6 +11,7 @@ import com.example.artyomvlasov.trendrecommendator.app.main.MainActivity
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constatns.CATEGORY_KEY
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constatns.COLOR_KEY
 import com.example.artyomvlasov.trendrecommendator.repositories.ClothesRepository
+import com.example.artyomvlasov.trendrecommendator.util.LazyLoadingScrollListener
 import dagger.android.AndroidInjection
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -38,12 +39,6 @@ class ClothesActivity : AppCompatActivity() {
         inflateClothes()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        android.R.id.home -> openMainActivity()
-        else -> super.onOptionsItemSelected(item)
-    }
-
-
     private fun openMainActivity(): Boolean {
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -69,16 +64,24 @@ class ClothesActivity : AppCompatActivity() {
                 )
     }
 
+    private fun getNextPage(offset: Int) {
+        disposable = clothesRepository.getClothes(color, category, offset)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeBy(
+                        onSuccess = {
+                            clothesAdapter.setData(it.products)
+                            clothesAdapter.notifyDataSetChanged()
+                        }
+                )
+    }
+
     private fun setupRecyclerView() {
         with(clothesRecyclerView) {
             adapter = clothesAdapter
             layoutManager = LinearLayoutManager(this@ClothesActivity)
             addItemDecoration(DividerItemDecoration(this@ClothesActivity, DividerItemDecoration.VERTICAL))
         }
-    }
-
-    override fun onBackPressed() {
-        openMainActivity()
     }
 
     override fun onDestroy() {

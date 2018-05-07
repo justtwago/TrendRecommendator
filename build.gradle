@@ -4,7 +4,8 @@ buildscript {
     ext {
         versions = [
                 buildTools: "27.0.3",
-                support   : "27.0.2",
+                support   : "27.1.1",
+                appCompat   : "27.1.0",
                 kotlin    : '1.2.41',
                 dagger    : "2.14.1",
                 retrofit  : "2.3.0",
@@ -27,6 +28,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 
