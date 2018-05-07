@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/moccasin"
-    tools:context="com.example.artyomvlasov.trendrecommendator.ui.PhotoResultActivity">
+    tools:context="com.example.artyomvlasov.trendrecommendator.app.photo.PhotoResultActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_top"
@@ -27,32 +27,79 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <ImageView
-        android:id="@+id/photo"
-        android:layout_width="200dp"
-        android:layout_height="300dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <View
-        android:id="@+id/colorView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photo"/>
-
     <TextView
-        android:id="@+id/colorText"
+        android:id="@+id/infoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Color: RED"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/colorView"/>
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_large"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/shirtIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_top"
+        android:layout_margin="@dimen/margin_huge"/>
+
+    <com.github.zagum.switchicon.SwitchIconView
+        android:id="@+id/shirtIcon"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_margin="@dimen/margin_small"
+        app:layout_constraintBottom_toTopOf="@+id/trousersIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/infoText"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:si_disabled_color="@color/colorPrimary"
+        app:si_no_dash="true"
+        app:si_tint_color="@color/white"
+        app:srcCompat="@drawable/ic_shirt"/>
+
+    <com.github.zagum.switchicon.SwitchIconView
+        android:id="@+id/trousersIcon"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_margin="@dimen/margin_small"
+        app:layout_constraintBottom_toTopOf="@+id/shoesIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shirtIcon"
+        app:si_disabled_color="@color/colorPrimary"
+        app:si_no_dash="true"
+        app:si_enabled="false"
+        app:si_tint_color="@color/blue"
+        app:srcCompat="@drawable/ic_trousers"
+        />
+
+    <com.github.zagum.switchicon.SwitchIconView
+        android:id="@+id/shoesIcon"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_margin="@dimen/margin_small"
+        app:layout_constraintBottom_toTopOf="@+id/goButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:si_enabled="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/trousersIcon"
+        app:si_disabled_color="@color/colorPrimary"
+        app:si_no_dash="true"
+        app:si_tint_color="@color/colorAccent"
+        app:srcCompat="@drawable/ic_shoes"
+        />
+
+    <Button
+        android:id="@+id/goButton"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_huge"
+        android:background="@drawable/retry_connection_button_shape"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/shoesIcon"/>
 
 </android.support.constraint.ConstraintLayout>

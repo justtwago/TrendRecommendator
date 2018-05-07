@@ -1,4 +1,4 @@
-package com.example.artyomvlasov.trendrecommendator;
+package com.example.artyomvlasov.trendrecommendator.util;
 
 import java.util.ArrayList;
 
