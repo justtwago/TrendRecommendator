@@ -10,6 +10,7 @@ import com.example.artyomvlasov.trendrecommendator.R
 import com.example.artyomvlasov.trendrecommendator.app.main.MainActivity
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constatns.CATEGORY_KEY
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constatns.COLOR_KEY
+import com.example.artyomvlasov.trendrecommendator.data.ClothesItem
 import com.example.artyomvlasov.trendrecommendator.repositories.ClothesRepository
 import com.example.artyomvlasov.trendrecommendator.util.LazyLoadingScrollListener
 import dagger.android.AndroidInjection
@@ -21,29 +22,21 @@ import kotlinx.android.synthetic.main.activity_clothes.*
 import javax.inject.Inject
 
 class ClothesActivity : AppCompatActivity() {
-    private var disposable: Disposable? = null
     private val clothesAdapter by lazy { ClothesAdapter(emptyList()) }
     private val color by lazy { intent.getStringExtra(COLOR_KEY) }
     private val category by lazy { intent.getStringExtra(CATEGORY_KEY) }
 
     @Inject
-    lateinit var clothesRepository: ClothesRepository
+    lateinit var presenter: ClothesInterface
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_clothes)
 
+        initPresenter()
         setupToolbar()
         setupRecyclerView()
-        inflateClothes()
-    }
-
-    private fun openMainActivity(): Boolean {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        return true
     }
 
     private fun setupToolbar() {
@@ -52,28 +45,8 @@ class ClothesActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun inflateClothes() {
-        disposable = clothesRepository.getClothes(color, category)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribeBy(
-                        onSuccess = {
-                            clothesAdapter.setData(it.products)
-                            clothesAdapter.notifyDataSetChanged()
-                        }
-                )
-    }
-
-    private fun getNextPage(offset: Int) {
-        disposable = clothesRepository.getClothes(color, category, offset)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribeBy(
-                        onSuccess = {
-                            clothesAdapter.setData(it.products)
-                            clothesAdapter.notifyDataSetChanged()
-                        }
-                )
+    private fun initPresenter() {
+        presenter.init(color, category)
     }
 
     private fun setupRecyclerView() {
@@ -81,11 +54,21 @@ class ClothesActivity : AppCompatActivity() {
             adapter = clothesAdapter
             layoutManager = LinearLayoutManager(this@ClothesActivity)
             addItemDecoration(DividerItemDecoration(this@ClothesActivity, DividerItemDecoration.VERTICAL))
+            presenter.onRecyclerViewReady(::updateClothesAdapter)
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable?.dispose()
+    private fun updateClothesAdapter(items: List<ClothesItem>) {
+        clothesAdapter.setData(items)
+        clothesAdapter.notifyDataSetChanged()
     }
+
+    override fun onOptionsItemSelected(item: MenuItem) =
+            when (item.itemId) {
+                android.R.id.home -> {
+                    onBackPressed()
+                    true
+                }
+                else -> super.onOptionsItemSelected(item)
+            }
 }

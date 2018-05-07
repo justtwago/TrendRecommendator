@@ -37,6 +37,11 @@ dependencies {
     implementation "com.android.support:support-v4:$versions.support"
     implementation "com.android.support:palette-v7:$versions.support"
 
+    // Architecture Components
+    implementation "android.arch.lifecycle:runtime:$versions.architectureComponents"
+    implementation "android.arch.lifecycle:extensions:$versions.architectureComponents"
+    kapt "android.arch.lifecycle:compiler:$versions.architectureComponents"
+
     // Glide
     implementation "com.github.bumptech.glide:glide:$versions.glide"
     implementation 'com.github.florent37:glidepalette:2.1.2'
