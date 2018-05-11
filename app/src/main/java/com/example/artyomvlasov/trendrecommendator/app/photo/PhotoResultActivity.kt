@@ -13,11 +13,14 @@ import com.example.artyomvlasov.trendrecommendator.app.clothes.main.ClothesActiv
 import com.example.artyomvlasov.trendrecommendator.app.utils.Category
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.CATEGORY_KEY
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.COLOR_KEY
+import com.example.artyomvlasov.trendrecommendator.tensorflow.ImageClassifier
+import com.example.artyomvlasov.trendrecommendator.util.ClothesTypeManager
 import kotlinx.android.synthetic.main.activity_photo_result.*
 
 class PhotoResultActivity : AppCompatActivity() {
     private val extras by lazy { intent.extras }
     private val imageBitmap by lazy { extras!!.get("data") as Bitmap }
+    private val classifier by lazy { ImageClassifier(this) }
     private lateinit var color: String
     private var category: String = "shirt"
     private var selectedCategory: Category = Category.TROUSER
@@ -26,7 +29,7 @@ class PhotoResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo_result)
 
-        recognizeColor(imageBitmap)
+        recognizeClothes(imageBitmap)
         setClickListeners()
     }
 
@@ -60,15 +63,21 @@ class PhotoResultActivity : AppCompatActivity() {
         }
     }
 
-    private fun recognizeColor(imageBitmap: Bitmap) {
+    private fun recognizeClothes(imageBitmap: Bitmap) {
         Palette.from(imageBitmap)
                 .generate { palette ->
                     val textSwatch = palette.vibrantSwatch
                     val dominantColor: Int
                     dominantColor = textSwatch?.rgb ?: palette.getDominantColor(Color.BLACK)
                     color = ColorUtils().getColorName(dominantColor)
+                    category = ClothesTypeManager.getClothesName(classifier.classifyFrame(imageBitmap))
                     val text = resources.getString(R.string.recognized_wear_info, color.toLowerCase(), category.toLowerCase())
                     infoText.text = text
                 }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        classifier.close()
     }
 }
