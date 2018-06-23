@@ -15,14 +15,18 @@ import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.CATEGORY_
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.COLOR_KEY
 import com.example.artyomvlasov.trendrecommendator.tensorflow.ImageClassifier
 import com.example.artyomvlasov.trendrecommendator.util.ClothesTypeManager
+import com.example.artyomvlasov.trendrecommendator.util.choiceHelper.ApiType
+import com.example.artyomvlasov.trendrecommendator.util.choiceHelper.ClothItem
+import com.example.artyomvlasov.trendrecommendator.util.choiceHelper.HelperFactory
+import com.example.artyomvlasov.trendrecommendator.util.colorClassification.ApiColor
 import kotlinx.android.synthetic.main.activity_photo_result.*
 
 class PhotoResultActivity : AppCompatActivity() {
     private val extras by lazy { intent.extras }
     private val imageBitmap by lazy { extras!!.get("data") as Bitmap }
     private val classifier by lazy { ImageClassifier(this) }
-    private lateinit var color: String
-    private var category: String = "shirt"
+    private var color = ""
+    private var category = ""
     private var selectedCategory: Category = Category.TROUSER
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,16 +68,40 @@ class PhotoResultActivity : AppCompatActivity() {
     }
 
     private fun recognizeClothes(imageBitmap: Bitmap) {
-        Palette.from(imageBitmap)
-                .generate { palette ->
-                    val textSwatch = palette.vibrantSwatch
-                    val dominantColor: Int
-                    dominantColor = textSwatch?.rgb ?: palette.getDominantColor(Color.BLACK)
-                    color = ColorUtils().getColorName(dominantColor)
-                    category = ClothesTypeManager.getClothesName(classifier.classifyFrame(imageBitmap))
-                    val text = resources.getString(R.string.recognized_wear_info, color.toLowerCase(), category.toLowerCase())
-                    infoText.text = text
-                }
+        saveClothesColor(imageBitmap)
+        saveClothesType(imageBitmap)
+        printClothesColorAndType()
+    }
+
+    private fun printClothesColorAndType() {
+        val text = resources.getString(R.string.recognized_wear_info,
+                color.toLowerCase(),
+                category.toLowerCase())
+        infoText.text = text
+    }
+
+    private fun saveClothesColor(imageBitmap: Bitmap) {
+        val palette = Palette.from(imageBitmap).generate()
+        saveDominantColor(palette)
+    }
+
+    private fun saveClothesType(imageBitmap: Bitmap) {
+        category = ClothesTypeManager.getClothesName(classifier.classifyFrame(imageBitmap))
+    }
+
+    private fun suggested(): ClothItem? {
+        val apiType = ApiType.valueOf(category)
+        val clothItem = ClothItem(ApiColor.valueOf(color), apiType)
+        val suggest = HelperFactory.fromFile("rules.txt")
+                .suggest(clothItem, apiType)
+        return suggest
+    }
+
+    private fun saveDominantColor(palette: Palette) {
+        val textSwatch = palette.vibrantSwatch
+        val dominantColor: Int
+        dominantColor = textSwatch?.rgb ?: palette.getDominantColor(Color.BLACK)
+        color = ColorUtils().getColorName(dominantColor)
     }
 
     override fun onDestroy() {

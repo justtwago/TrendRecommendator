@@ -7,8 +7,8 @@ buildscript {
                 architectureComponents: "1.1.1",
                 support   : "27.1.1",
                 appCompat   : "27.1.0",
-                kotlin    : '1.2.41',
-                dagger    : "2.14.1",
+                kotlin    : '1.2.50',
+                dagger    : "2.16",
                 retrofit  : "2.3.0",
                 glide     : '4.6.1'
         ]
@@ -20,7 +20,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.android.tools.build:gradle:3.1.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
     }
 }

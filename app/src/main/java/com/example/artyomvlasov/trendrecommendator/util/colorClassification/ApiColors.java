@@ -3,8 +3,7 @@ package com.example.artyomvlasov.trendrecommendator.util.colorClassification;
 import java.util.Arrays;
 import java.util.List;
 
-import static colorClassification.ApiColor.*;
-
+import static com.example.artyomvlasov.trendrecommendator.util.colorClassification.ApiColor.*;
 
 public class ApiColors {
 	private static final List<ColorRange> colorRanges = Arrays.asList(

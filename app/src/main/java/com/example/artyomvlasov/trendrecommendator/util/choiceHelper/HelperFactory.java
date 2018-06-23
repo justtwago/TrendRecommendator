@@ -13,7 +13,7 @@ public class HelperFactory {
 	private final static String RULE_PARTS_SEPARATOR = "==";
 	private final static String ITEM_COLOR_TYPE_SEPARATOR = "_";
 
-	/*public static ChoiceHelper fromRules(List<ItemConnection> connections) {
+	public static ChoiceHelper fromRules(List<ItemConnection> connections) {
 		return fromStream(connections.stream());
 	}
 
@@ -28,7 +28,7 @@ public class HelperFactory {
 
 	private static ChoiceHelper fromStream(Stream<ItemConnection> freshStream) {
 		return new ChoiceHelper(freshStream.collect(Collectors.groupingBy(ItemConnection::item1)));
-	}*/
+	}
 
 	private static ClothItem lineToItem(String line) {
 		String[] split = line.split(ITEM_COLOR_TYPE_SEPARATOR);

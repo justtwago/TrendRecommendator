@@ -10,7 +10,7 @@ public class ChoiceHelper {
 		this.connectionsMap = connectionsMap;
 	}
 
-	private ClothItem suggest(ClothItem base, ApiType wantedType) {
+	public ClothItem suggest(ClothItem base, ApiType wantedType) {
 		List<ItemConnection> specificConnections = connectionsMap.get(base);
 		if (specificConnections == null) return ClothItem.UNKNOWN;
 
