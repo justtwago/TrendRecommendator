@@ -29,26 +29,60 @@
 
     <TextView
         android:id="@+id/infoText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_huge"
+        android:gravity="center_horizontal"
         android:textColor="@color/white"
-        android:gravity="center"
         android:textSize="@dimen/text_size_large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_top"
-        android:layout_margin="@dimen/margin_huge"/>
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_top"/>
 
     <com.github.zagum.switchicon.SwitchIconView
-        android:id="@+id/shirtIcon"
+        android:id="@+id/maleIcon"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_margin="@dimen/margin_small"
+        app:layout_constraintBottom_toTopOf="@+id/trousersIcon"
+        app:layout_constraintEnd_toStartOf="@+id/femaleIcon"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infoText"
+        app:layout_constraintVertical_bias="0.174"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:si_disabled_color="@color/colorPrimary"
+        app:si_no_dash="true"
+        app:si_tint_color="@color/blue"
+        app:srcCompat="@drawable/ic_male"/>
+
+    <com.github.zagum.switchicon.SwitchIconView
+        android:id="@+id/femaleIcon"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
         android:layout_margin="@dimen/margin_small"
         app:layout_constraintBottom_toTopOf="@+id/trousersIcon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_top"
+        app:layout_constraintStart_toEndOf="@+id/maleIcon"
+        app:layout_constraintTop_toBottomOf="@+id/infoText"
+        app:layout_constraintVertical_bias="0.172"
         app:layout_constraintVertical_chainStyle="packed"
+        app:si_disabled_color="@color/colorPrimary"
+        app:si_enabled="false"
+        app:si_no_dash="true"
+        app:si_tint_color="@color/pink"
+        app:srcCompat="@drawable/ic_female"/>
+
+    <com.github.zagum.switchicon.SwitchIconView
+        android:id="@+id/shirtIcon"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_margin="@dimen/margin_large"
+        app:layout_constraintBottom_toTopOf="@+id/trousersIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/femaleIcon"
+        app:layout_constraintVertical_chainStyle="spread_inside"
         app:si_disabled_color="@color/colorPrimary"
         app:si_no_dash="true"
         app:si_tint_color="@color/white"
@@ -75,7 +109,7 @@
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
         android:layout_margin="@dimen/margin_small"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/goButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/trousersIcon"
@@ -88,15 +122,16 @@
 
     <Button
         android:id="@+id/goButton"
-        android:layout_width="@dimen/icon_size"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_huge"
+        android:layout_margin="@dimen/margin_large"
         android:background="@drawable/retry_connection_button_shape"
         android:foreground="?attr/selectableItemBackground"
         android:text="@string/next"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shoesIcon"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -13,26 +13,17 @@ import javax.inject.Inject
 class ClothesPresenter @Inject constructor(private val clothesRepository: ClothesRepository) : ClothesInterface, ViewModel() {
     private var color: String? = null
     private var category: String? = null
+    private var gender: String? = null
     private var disposable: Disposable? = null
 
-    override fun init(color: String?, category: String?) {
+    override fun init(color: String?, category: String?, gender: String) {
         this.color = color
         this.category = category
+        this.gender = gender
     }
 
     override fun onRecyclerViewReady(action: (List<ClothesItem>) -> Unit) {
-        disposable = clothesRepository.getClothes(color, category)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribeBy(
-                        onSuccess = {
-                            action(it.products)
-                        }
-                )
-    }
-
-    private fun getNextPage(offset: Int, action: (List<ClothesItem>) -> Unit) {
-        disposable = clothesRepository.getClothes(color, category, offset)
+        disposable = clothesRepository.getClothes(color, category, gender)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(

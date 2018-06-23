@@ -11,8 +11,10 @@ import com.example.artyomvlasov.trendrecommendator.util.ColorUtils
 import com.example.artyomvlasov.trendrecommendator.R
 import com.example.artyomvlasov.trendrecommendator.app.clothes.main.ClothesActivity
 import com.example.artyomvlasov.trendrecommendator.app.utils.Category
+import com.example.artyomvlasov.trendrecommendator.app.utils.Constants
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.CATEGORY_KEY
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.COLOR_KEY
+import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.GENDER_KEY
 import com.example.artyomvlasov.trendrecommendator.tensorflow.ImageClassifier
 import com.example.artyomvlasov.trendrecommendator.util.ClothesTypeManager
 import com.example.artyomvlasov.trendrecommendator.util.choiceHelper.ApiType
@@ -27,6 +29,7 @@ class PhotoResultActivity : AppCompatActivity() {
     private val classifier by lazy { ImageClassifier(this) }
     private var color = ""
     private var category = ""
+    private var gender = Constants.MEN
     private var selectedCategory: Category = Category.TROUSER
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +45,20 @@ class PhotoResultActivity : AppCompatActivity() {
             val intent = Intent(this, ClothesActivity::class.java)
             intent.putExtra(COLOR_KEY, color)
             intent.putExtra(CATEGORY_KEY, selectedCategory.name)
+            intent.putExtra(GENDER_KEY, gender)
             startActivity(intent)
+        }
+
+        maleIcon.setOnClickListener {
+            maleIcon.setIconEnabled(true, true)
+            femaleIcon.setIconEnabled(false, true)
+            gender = Constants.MEN
+        }
+
+        femaleIcon.setOnClickListener {
+            femaleIcon.setIconEnabled(true, true)
+            maleIcon.setIconEnabled(false, true)
+            gender = Constants.WOMEN
         }
 
         shirtIcon.setOnClickListener {
