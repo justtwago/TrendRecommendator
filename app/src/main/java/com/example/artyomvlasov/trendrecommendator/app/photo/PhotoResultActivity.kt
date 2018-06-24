@@ -21,6 +21,7 @@ import com.example.artyomvlasov.trendrecommendator.util.choiceHelper.ApiType
 import com.example.artyomvlasov.trendrecommendator.util.choiceHelper.ClothItem
 import com.example.artyomvlasov.trendrecommendator.util.choiceHelper.HelperFactory
 import com.example.artyomvlasov.trendrecommendator.util.colorClassification.ApiColor
+import com.example.artyomvlasov.trendrecommendator.util.colorClassification.ApiColors
 import kotlinx.android.synthetic.main.activity_photo_result.*
 
 class PhotoResultActivity : AppCompatActivity() {
@@ -117,7 +118,7 @@ class PhotoResultActivity : AppCompatActivity() {
         val textSwatch = palette.vibrantSwatch
         val dominantColor: Int
         dominantColor = textSwatch?.rgb ?: palette.getDominantColor(Color.BLACK)
-        color = ColorUtils().getColorName(dominantColor)
+        color = ApiColors.fromRGB(Color.valueOf(dominantColor)).name
     }
 
     override fun onDestroy() {
