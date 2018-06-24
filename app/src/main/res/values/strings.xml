@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Trend Recommendator</string>
     <string name="take_a_photo">TAKE A PHOTO!</string>
-    <string name="recognized_wear_info">You have %1$s %2$s.\n What do you want to match?</string>
+    <string name="recognized_wear_info">You have %1$s %2$s.\n What do you want to match to?</string>
     <string name="next">NEXT</string>
+    <string name="website">GO TO WEBSITE</string>
+    <string name="details">details</string>
+    <string name="results">results</string>
 </resources>

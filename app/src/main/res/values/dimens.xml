@@ -5,5 +5,9 @@
     <dimen name="margin_huge">24dp</dimen>
     <dimen name="text_size_large">18sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
-    <dimen name="icon_size">96dp</dimen>
+    <dimen name="icon_size">72dp</dimen>
+    <dimen name="speech_bubble_corners">10dp</dimen>
+    <dimen name="speech_bubble_corners_plus_tail">15dp</dimen>
+    <dimen name="speech_bubble_spacing">5dp</dimen>
+    <dimen name="speech_bubble_tail">25dp</dimen>
 </resources>

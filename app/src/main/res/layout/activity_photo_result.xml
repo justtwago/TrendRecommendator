@@ -34,8 +34,6 @@
         android:textColor="@color/white"
         android:gravity="center"
         android:textSize="@dimen/text_size_large"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/shirtIcon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_top"
@@ -49,7 +47,7 @@
         app:layout_constraintBottom_toTopOf="@+id/trousersIcon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/infoText"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_top"
         app:layout_constraintVertical_chainStyle="packed"
         app:si_disabled_color="@color/colorPrimary"
         app:si_no_dash="true"
@@ -66,8 +64,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shirtIcon"
         app:si_disabled_color="@color/colorPrimary"
-        app:si_no_dash="true"
         app:si_enabled="false"
+        app:si_no_dash="true"
         app:si_tint_color="@color/blue"
         app:srcCompat="@drawable/ic_trousers"
         />
@@ -77,12 +75,12 @@
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
         android:layout_margin="@dimen/margin_small"
-        app:layout_constraintBottom_toTopOf="@+id/goButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:si_enabled="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/trousersIcon"
         app:si_disabled_color="@color/colorPrimary"
+        app:si_enabled="false"
         app:si_no_dash="true"
         app:si_tint_color="@color/colorAccent"
         app:srcCompat="@drawable/ic_shoes"
@@ -99,7 +97,6 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/shoesIcon"/>
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

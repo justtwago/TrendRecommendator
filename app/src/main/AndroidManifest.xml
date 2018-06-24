@@ -5,6 +5,7 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true"/>
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -26,7 +27,9 @@
         </activity>
         <activity android:name=".app.photo.PhotoResultActivity">
         </activity>
-        <activity android:name=".app.clothes.ClothesActivity">
+        <activity android:name=".app.clothes.main.ClothesActivity">
+        </activity>
+        <activity android:name=".app.clothes.details.ClothesDetailsActivity">
         </activity>
     </application>
 

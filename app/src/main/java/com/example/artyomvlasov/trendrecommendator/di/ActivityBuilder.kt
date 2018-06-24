@@ -1,6 +1,6 @@
 package com.example.artyomvlasov.trendrecommendator.di
 
-import com.example.artyomvlasov.trendrecommendator.app.clothes.ClothesActivity
+import com.example.artyomvlasov.trendrecommendator.app.clothes.main.ClothesActivity
 import com.example.artyomvlasov.trendrecommendator.app.main.MainActivity
 import com.example.artyomvlasov.trendrecommendator.app.photo.PhotoResultActivity
 import dagger.Module
