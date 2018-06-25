@@ -10,14 +10,14 @@ public class ChoiceHelper {
 		this.connectionsMap = connectionsMap;
 	}
 
-	public ClothItem suggest(ClothItem base, ApiType wantedType) {
+	public ClothItem suggest(ClothItem base, ApiCategory wantedType) {
 		List<ItemConnection> specificConnections = connectionsMap.get(base);
 		if (specificConnections == null) return ClothItem.UNKNOWN;
 
 		return bestPair(base, wantedType, specificConnections);
 	}
 
-	private ClothItem bestPair(ClothItem base, ApiType wantedType, List<ItemConnection> specificConnections) {
+	private ClothItem bestPair(ClothItem base, ApiCategory wantedType, List<ItemConnection> specificConnections) {
 		double maxWeight = -1;
 		ClothItem bestPair = ClothItem.UNKNOWN;
 		for (ItemConnection connection : specificConnections) {
