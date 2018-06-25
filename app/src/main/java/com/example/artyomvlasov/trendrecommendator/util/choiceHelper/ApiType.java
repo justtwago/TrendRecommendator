@@ -1,5 +1,6 @@
 package com.example.artyomvlasov.trendrecommendator.util.choiceHelper;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +25,17 @@ public enum ApiType {
             put(UNKNOWN, "unknown");
         }
     };
+
+    public static Collection<ApiType> ALL_TYPES = names.keySet();
+
+    public static ApiType getCategory(String name) {
+        for (ApiType apiType : ALL_TYPES) {
+            if (names.get(apiType).equals(name)) {
+                return apiType;
+            }
+        }
+        return UNKNOWN;
+    }
 
     @Override
     public String toString() {

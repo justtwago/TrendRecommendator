@@ -1,12 +1,13 @@
 package com.example.artyomvlasov.trendrecommendator.util.choiceHelper;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public enum ApiCategory {
     TOP, BOTTOM, SHOES;
 
-    public static Map<ApiType, ApiCategory> getCategoryByType = new HashMap<ApiType, ApiCategory>() {{
+    public static Map<ApiType, ApiCategory> categoriesByType = new HashMap<ApiType, ApiCategory>() {{
         put(ApiType.SHOES, SHOES);
         put(ApiType.BLOUSE, TOP);
         put(ApiType.JEANS, BOTTOM);
@@ -22,5 +23,4 @@ public enum ApiCategory {
         put(ApiType.COAT, TOP);
         put(ApiType.UNKNOWN, TOP);
     }};
-
 }

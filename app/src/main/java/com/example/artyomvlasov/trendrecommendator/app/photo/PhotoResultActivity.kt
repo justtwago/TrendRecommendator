@@ -12,18 +12,18 @@ import android.view.View
 
 import com.example.artyomvlasov.trendrecommendator.R
 import com.example.artyomvlasov.trendrecommendator.app.clothes.main.ClothesActivity
-import com.example.artyomvlasov.trendrecommendator.app.utils.Category
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constants
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.TYPE_KEY
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.COLOR_KEY
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.GENDER_KEY
 import com.example.artyomvlasov.trendrecommendator.tensorflow.ImageClassifier
+import com.example.artyomvlasov.trendrecommendator.util.ClothesTypeManager
 import com.example.artyomvlasov.trendrecommendator.util.choiceHelper.*
 import com.example.artyomvlasov.trendrecommendator.util.colorClassification.ApiColor
 import com.example.artyomvlasov.trendrecommendator.util.colorClassification.ApiColors
 import kotlinx.android.synthetic.main.activity_photo_result.*
 
-private const val RULES_PATH = "/Users/artyomvlasov/AndroidStudioProjects/TrendRecommendator/app/src/main/assets/rules.txt"
+private const val RULES_PATH = "rules.txt"
 
 class PhotoResultActivity : AppCompatActivity() {
     private val extras by lazy { intent.extras }
@@ -44,7 +44,7 @@ class PhotoResultActivity : AppCompatActivity() {
     }
 
     private fun setButtonsVisibility() {
-        when (ApiCategory.getCategoryByType[clothesType]) {
+        when (ApiCategory.categoriesByType[clothesType]) {
             ApiCategory.TOP -> shirtIcon.visibility = View.GONE
             ApiCategory.BOTTOM -> trousersIcon.visibility = View.GONE
             ApiCategory.SHOES -> shoesIcon.visibility = View.GONE
@@ -53,7 +53,7 @@ class PhotoResultActivity : AppCompatActivity() {
 
     private fun setClickListeners() {
         goButton.setOnClickListener {
-            val suggestedItem: ClothItem = HelperFactory.fromFile(RULES_PATH).suggest(ClothItem(clothesColor, clothesType), clothesCategory)
+            val suggestedItem: ClothItem = HelperFactory.fromFile(this, RULES_PATH).suggest(ClothItem(clothesColor, clothesType), clothesCategory)
             val intent = Intent(this, ClothesActivity::class.java)
             intent.putExtra(COLOR_KEY, suggestedItem.color().name)
             intent.putExtra(TYPE_KEY, suggestedItem.type().name)
@@ -114,7 +114,7 @@ class PhotoResultActivity : AppCompatActivity() {
     }
 
     private fun saveClothesType(imageBitmap: Bitmap) {
-        clothesType = ApiType.valueOf(classifier.classifyFrame(imageBitmap))
+        clothesType = ApiType.getCategory(ClothesTypeManager.getClothesName(classifier.classifyFrame(imageBitmap)))
     }
 
     @TargetApi(Build.VERSION_CODES.O)
