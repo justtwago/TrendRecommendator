@@ -5,7 +5,7 @@ import com.example.artyomvlasov.trendrecommendator.util.colorClassification.ApiC
 import java.util.Objects;
 
 public class ClothItem {
-	public final static ClothItem UNKNOWN = new ClothItem(ApiColor.Undefined, ApiType.Unknown);
+	public final static ClothItem UNKNOWN = new ClothItem(ApiColor.Cyan, ApiType.UNKNOWN);
 
 	private ApiColor color;
 	private ApiType type;

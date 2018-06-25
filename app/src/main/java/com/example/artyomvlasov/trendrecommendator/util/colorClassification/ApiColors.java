@@ -82,7 +82,7 @@ public class ApiColors {
             if (colorRange.contains(hue, sat, lum)) return colorRange.color();
         }
 
-        return Undefined;
+        return Cyan;
     }
 
     public static ApiColor fromRGB(Color color) {

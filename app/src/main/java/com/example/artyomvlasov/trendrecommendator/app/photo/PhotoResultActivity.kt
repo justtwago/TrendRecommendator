@@ -25,6 +25,7 @@ class PhotoResultActivity : AppCompatActivity() {
     private val classifier by lazy { ImageClassifier(this) }
     private var clothesColor = ""
     private var clothesType = ""
+    private var clothesCategory = ""
     private var gender = Constants.MEN
     private var selectedCategory: Category = Category.TROUSER
 

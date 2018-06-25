@@ -14,5 +14,5 @@ public enum ApiColor {
 	Blue,
 	Purple,
 	Pink,
-	Undefined
+	Cyan
 }
