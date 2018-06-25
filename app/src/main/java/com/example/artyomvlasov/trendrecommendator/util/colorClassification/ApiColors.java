@@ -86,19 +86,13 @@ public class ApiColors {
     }
 
     public static ApiColor fromRGB(Color color) {
-        //  Get RGB values in the range 0 - 1
-
         float[] rgb = color.getComponents();
         float r = rgb[0];
         float g = rgb[1];
         float b = rgb[2];
 
-        //	Minimum and Maximum RGB values are used in the HSL calculations
-
         float min = Math.min(r, Math.min(g, b));
         float max = Math.max(r, Math.max(g, b));
-
-        //  Calculate the Hue
 
         float h = 0;
 
@@ -109,13 +103,9 @@ public class ApiColors {
             h = (60 * (r - g) / (max - min)) + 240;
         }
 
-        //  Calculate the Luminance
-
         float l = (max + min) / 2;
 
-        //  Calculate the Saturation
-
-        float s = 0;
+        float s;
 
         if (max == min) { s = 0; } else if (l <= .5f) { s = (max - min) / (max + min); } else {
             s = (max - min) / (2 - max - min);

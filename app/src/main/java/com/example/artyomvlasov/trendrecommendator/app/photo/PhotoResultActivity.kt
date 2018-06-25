@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.graphics.Palette
 
-import com.example.artyomvlasov.trendrecommendator.util.ColorUtils
 import com.example.artyomvlasov.trendrecommendator.R
 import com.example.artyomvlasov.trendrecommendator.app.clothes.main.ClothesActivity
 import com.example.artyomvlasov.trendrecommendator.app.utils.Category
@@ -17,10 +16,6 @@ import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.COLOR_KEY
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.GENDER_KEY
 import com.example.artyomvlasov.trendrecommendator.tensorflow.ImageClassifier
 import com.example.artyomvlasov.trendrecommendator.util.ClothesTypeManager
-import com.example.artyomvlasov.trendrecommendator.util.choiceHelper.ApiType
-import com.example.artyomvlasov.trendrecommendator.util.choiceHelper.ClothItem
-import com.example.artyomvlasov.trendrecommendator.util.choiceHelper.HelperFactory
-import com.example.artyomvlasov.trendrecommendator.util.colorClassification.ApiColor
 import com.example.artyomvlasov.trendrecommendator.util.colorClassification.ApiColors
 import kotlinx.android.synthetic.main.activity_photo_result.*
 
@@ -28,8 +23,8 @@ class PhotoResultActivity : AppCompatActivity() {
     private val extras by lazy { intent.extras }
     private val imageBitmap by lazy { extras!!.get("data") as Bitmap }
     private val classifier by lazy { ImageClassifier(this) }
-    private var color = ""
-    private var category = ""
+    private var clothesColor = ""
+    private var clothesType = ""
     private var gender = Constants.MEN
     private var selectedCategory: Category = Category.TROUSER
 
@@ -44,7 +39,7 @@ class PhotoResultActivity : AppCompatActivity() {
     private fun setClickListeners() {
         goButton.setOnClickListener {
             val intent = Intent(this, ClothesActivity::class.java)
-            intent.putExtra(COLOR_KEY, color)
+            intent.putExtra(COLOR_KEY, clothesColor)
             intent.putExtra(CATEGORY_KEY, selectedCategory.name)
             intent.putExtra(GENDER_KEY, gender)
             startActivity(intent)
@@ -92,8 +87,8 @@ class PhotoResultActivity : AppCompatActivity() {
 
     private fun printClothesColorAndType() {
         val text = resources.getString(R.string.recognized_wear_info,
-                color.toLowerCase(),
-                category.toLowerCase())
+                clothesColor.toLowerCase(),
+                clothesType.toLowerCase())
         infoText.text = text
     }
 
@@ -103,22 +98,14 @@ class PhotoResultActivity : AppCompatActivity() {
     }
 
     private fun saveClothesType(imageBitmap: Bitmap) {
-        category = ClothesTypeManager.getClothesName(classifier.classifyFrame(imageBitmap))
-    }
-
-    private fun suggested(): ClothItem? {
-        val apiType = ApiType.valueOf(category)
-        val clothItem = ClothItem(ApiColor.valueOf(color), apiType)
-        val suggest = HelperFactory.fromFile("rules.txt")
-                .suggest(clothItem, apiType)
-        return suggest
+        clothesType = ClothesTypeManager.getClothesName(classifier.classifyFrame(imageBitmap))
     }
 
     private fun saveDominantColor(palette: Palette) {
         val textSwatch = palette.vibrantSwatch
         val dominantColor: Int
         dominantColor = textSwatch?.rgb ?: palette.getDominantColor(Color.BLACK)
-        color = ApiColors.fromRGB(Color.valueOf(dominantColor)).name
+        clothesColor = ApiColors.fromRGB(Color.valueOf(dominantColor)).name
     }
 
     override fun onDestroy() {
