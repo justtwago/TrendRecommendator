@@ -8,23 +8,22 @@ import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.graphics.Palette
+import android.view.View
 
 import com.example.artyomvlasov.trendrecommendator.R
 import com.example.artyomvlasov.trendrecommendator.app.clothes.main.ClothesActivity
 import com.example.artyomvlasov.trendrecommendator.app.utils.Category
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constants
-import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.CATEGORY_KEY
+import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.TYPE_KEY
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.COLOR_KEY
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.GENDER_KEY
 import com.example.artyomvlasov.trendrecommendator.tensorflow.ImageClassifier
-import com.example.artyomvlasov.trendrecommendator.util.ClothesTypeManager
-import com.example.artyomvlasov.trendrecommendator.util.choiceHelper.ApiCategory
-import com.example.artyomvlasov.trendrecommendator.util.choiceHelper.ApiType
-import com.example.artyomvlasov.trendrecommendator.util.choiceHelper.ChoiceHelper
-import com.example.artyomvlasov.trendrecommendator.util.choiceHelper.ClothItem
+import com.example.artyomvlasov.trendrecommendator.util.choiceHelper.*
 import com.example.artyomvlasov.trendrecommendator.util.colorClassification.ApiColor
 import com.example.artyomvlasov.trendrecommendator.util.colorClassification.ApiColors
 import kotlinx.android.synthetic.main.activity_photo_result.*
+
+private const val RULES_PATH = "/Users/artyomvlasov/AndroidStudioProjects/TrendRecommendator/app/src/main/assets/rules.txt"
 
 class PhotoResultActivity : AppCompatActivity() {
     private val extras by lazy { intent.extras }
@@ -34,22 +33,30 @@ class PhotoResultActivity : AppCompatActivity() {
     private var clothesType = ApiType.UNKNOWN
     private var clothesCategory = ApiCategory.TOP
     private var gender = Constants.MEN
-    private var selectedCategory: Category = Category.TROUSER
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo_result)
 
         recognizeClothes(imageBitmap)
+        setButtonsVisibility()
         setClickListeners()
+    }
+
+    private fun setButtonsVisibility() {
+        when (ApiCategory.getCategoryByType[clothesType]) {
+            ApiCategory.TOP -> shirtIcon.visibility = View.GONE
+            ApiCategory.BOTTOM -> trousersIcon.visibility = View.GONE
+            ApiCategory.SHOES -> shoesIcon.visibility = View.GONE
+        }
     }
 
     private fun setClickListeners() {
         goButton.setOnClickListener {
-            ChoiceHelper().suggest(ClothItem(clothesColor, clothesType), )
+            val suggestedItem: ClothItem = HelperFactory.fromFile(RULES_PATH).suggest(ClothItem(clothesColor, clothesType), clothesCategory)
             val intent = Intent(this, ClothesActivity::class.java)
-            intent.putExtra(COLOR_KEY, clothesColor)
-            intent.putExtra(CATEGORY_KEY, selectedCategory.name)
+            intent.putExtra(COLOR_KEY, suggestedItem.color().name)
+            intent.putExtra(TYPE_KEY, suggestedItem.type().name)
             intent.putExtra(GENDER_KEY, gender)
             startActivity(intent)
         }
@@ -70,21 +77,21 @@ class PhotoResultActivity : AppCompatActivity() {
             shirtIcon.setIconEnabled(true, true)
             trousersIcon.setIconEnabled(false, true)
             shoesIcon.setIconEnabled(false, true)
-            selectedCategory = Category.SHIRT
+            clothesCategory = ApiCategory.TOP
         }
 
         trousersIcon.setOnClickListener {
             shirtIcon.setIconEnabled(false, true)
             trousersIcon.setIconEnabled(true, true)
             shoesIcon.setIconEnabled(false, true)
-            selectedCategory = Category.TROUSER
+            clothesCategory = ApiCategory.BOTTOM
         }
 
         shoesIcon.setOnClickListener {
             shirtIcon.setIconEnabled(false, true)
             trousersIcon.setIconEnabled(false, true)
             shoesIcon.setIconEnabled(true, true)
-            selectedCategory = Category.SNEAKER
+            clothesCategory = ApiCategory.SHOES
         }
     }
 

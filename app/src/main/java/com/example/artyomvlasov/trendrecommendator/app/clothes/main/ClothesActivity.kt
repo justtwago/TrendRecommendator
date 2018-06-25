@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import com.example.artyomvlasov.trendrecommendator.R
 import com.example.artyomvlasov.trendrecommendator.app.utils.extensions.consume
-import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.CATEGORY_KEY
+import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.TYPE_KEY
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.COLOR_KEY
 import com.example.artyomvlasov.trendrecommendator.app.utils.Constants.GENDER_KEY
 import com.example.artyomvlasov.trendrecommendator.data.ClothesItem
@@ -18,7 +18,7 @@ import javax.inject.Inject
 class ClothesActivity : AppCompatActivity() {
     private val clothesAdapter by lazy { ClothesAdapter(this, emptyList()) }
     private val color by lazy { intent.getStringExtra(COLOR_KEY) }
-    private val category by lazy { intent.getStringExtra(CATEGORY_KEY) }
+    private val category by lazy { intent.getStringExtra(TYPE_KEY) }
     private val gender by lazy { intent.getStringExtra(GENDER_KEY) }
 
     @Inject

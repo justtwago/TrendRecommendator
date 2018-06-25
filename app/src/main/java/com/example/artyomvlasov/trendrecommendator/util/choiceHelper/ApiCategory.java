@@ -5,7 +5,8 @@ import java.util.Map;
 
 public enum ApiCategory {
     TOP, BOTTOM, SHOES;
-    public Map<ApiType, ApiCategory> getCategoryByType = new HashMap<ApiType, ApiCategory>() {{
+
+    public static Map<ApiType, ApiCategory> getCategoryByType = new HashMap<ApiType, ApiCategory>() {{
         put(ApiType.SHOES, SHOES);
         put(ApiType.BLOUSE, TOP);
         put(ApiType.JEANS, BOTTOM);
