@@ -1,137 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/moccasin"
-    tools:context="com.example.artyomvlasov.trendrecommendator.app.photo.PhotoResultActivity">
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_top"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:minHeight="?attr/actionBarSize">
+        android:layout_height="match_parent"
+        android:background="@color/moccasin"
+        tools:context="com.example.artyomvlasov.trendrecommendator.app.photo.PhotoResultActivity">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:minHeight="?attr/actionBarSize">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/app_name"
+                android:textAllCaps="true"
+                android:textColor="@color/white"/>
+
+        </android.support.v7.widget.Toolbar>
 
         <TextView
-            android:id="@+id/toolbar_title"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-            android:layout_width="wrap_content"
+            android:id="@+id/infoText"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/app_name"
-            android:textAllCaps="true"
-            android:textColor="@color/white"/>
+            android:layout_margin="@dimen/margin_huge"
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_top"/>
 
-    </android.support.v7.widget.Toolbar>
+        <com.github.zagum.switchicon.SwitchIconView
+            android:id="@+id/maleIcon"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginEnd="@dimen/margin_small"
+            app:layout_constraintBottom_toBottomOf="@+id/femaleIcon"
+            app:layout_constraintEnd_toStartOf="@+id/femaleIcon"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/femaleIcon"
+            app:layout_constraintVertical_bias="0.174"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:si_disabled_color="@color/colorPrimary"
+            app:si_no_dash="true"
+            app:si_tint_color="@color/blue"
+            app:srcCompat="@drawable/ic_male"/>
 
-    <TextView
-        android:id="@+id/infoText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_huge"
-        android:gravity="center_horizontal"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_top"/>
+        <com.github.zagum.switchicon.SwitchIconView
+            android:id="@+id/femaleIcon"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_margin="@dimen/margin_small"
+            app:layout_constraintBottom_toTopOf="@+id/shirtIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/maleIcon"
+            app:layout_constraintTop_toBottomOf="@+id/infoText"
+            app:layout_constraintVertical_bias="0.172"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:si_disabled_color="@color/colorPrimary"
+            app:si_enabled="false"
+            app:si_no_dash="true"
+            app:si_tint_color="@color/pink"
+            app:srcCompat="@drawable/ic_female"/>
 
-    <com.github.zagum.switchicon.SwitchIconView
-        android:id="@+id/maleIcon"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:layout_margin="@dimen/margin_small"
-        app:layout_constraintBottom_toTopOf="@+id/trousersIcon"
-        app:layout_constraintEnd_toStartOf="@+id/femaleIcon"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoText"
-        app:layout_constraintVertical_bias="0.174"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:si_disabled_color="@color/colorPrimary"
-        app:si_no_dash="true"
-        app:si_tint_color="@color/blue"
-        app:srcCompat="@drawable/ic_male"/>
+        <com.github.zagum.switchicon.SwitchIconView
+            android:id="@+id/shirtIcon"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_margin="@dimen/margin_huge"
+            app:layout_constraintBottom_toTopOf="@+id/trousersIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/femaleIcon"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:si_disabled_color="@color/colorPrimary"
+            app:si_no_dash="true"
+            app:si_tint_color="@color/white"
+            app:srcCompat="@drawable/ic_shirt"/>
 
-    <com.github.zagum.switchicon.SwitchIconView
-        android:id="@+id/femaleIcon"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:layout_margin="@dimen/margin_small"
-        app:layout_constraintBottom_toTopOf="@+id/trousersIcon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/maleIcon"
-        app:layout_constraintTop_toBottomOf="@+id/infoText"
-        app:layout_constraintVertical_bias="0.172"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:si_disabled_color="@color/colorPrimary"
-        app:si_enabled="false"
-        app:si_no_dash="true"
-        app:si_tint_color="@color/pink"
-        app:srcCompat="@drawable/ic_female"/>
+        <com.github.zagum.switchicon.SwitchIconView
+            android:id="@+id/trousersIcon"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_margin="@dimen/margin_huge"
+            app:layout_constraintBottom_toTopOf="@+id/shoesIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shirtIcon"
+            app:si_disabled_color="@color/colorPrimary"
+            app:si_enabled="false"
+            app:si_no_dash="true"
+            app:si_tint_color="@color/blue"
+            app:srcCompat="@drawable/ic_trousers"
+            />
 
-    <com.github.zagum.switchicon.SwitchIconView
-        android:id="@+id/shirtIcon"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:layout_margin="@dimen/margin_large"
-        app:layout_constraintBottom_toTopOf="@+id/trousersIcon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/femaleIcon"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        app:si_disabled_color="@color/colorPrimary"
-        app:si_no_dash="true"
-        app:si_tint_color="@color/white"
-        app:srcCompat="@drawable/ic_shirt"/>
+        <com.github.zagum.switchicon.SwitchIconView
+            android:id="@+id/shoesIcon"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_margin="@dimen/margin_huge"
+            app:layout_constraintBottom_toTopOf="@+id/goButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/trousersIcon"
+            app:si_disabled_color="@color/colorPrimary"
+            app:si_enabled="false"
+            app:si_no_dash="true"
+            app:si_tint_color="@color/colorAccent"
+            app:srcCompat="@drawable/ic_shoes"
+            />
 
-    <com.github.zagum.switchicon.SwitchIconView
-        android:id="@+id/trousersIcon"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:layout_margin="@dimen/margin_small"
-        app:layout_constraintBottom_toTopOf="@+id/shoesIcon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shirtIcon"
-        app:si_disabled_color="@color/colorPrimary"
-        app:si_enabled="false"
-        app:si_no_dash="true"
-        app:si_tint_color="@color/blue"
-        app:srcCompat="@drawable/ic_trousers"
-        />
+        <Button
+            android:id="@+id/goButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_huge"
+            android:background="@drawable/retry_connection_button_shape"
+            android:foreground="?attr/selectableItemBackground"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
 
-    <com.github.zagum.switchicon.SwitchIconView
-        android:id="@+id/shoesIcon"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:layout_margin="@dimen/margin_small"
-        app:layout_constraintBottom_toTopOf="@+id/goButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/trousersIcon"
-        app:si_disabled_color="@color/colorPrimary"
-        app:si_enabled="false"
-        app:si_no_dash="true"
-        app:si_tint_color="@color/colorAccent"
-        app:srcCompat="@drawable/ic_shoes"
-        />
-
-    <Button
-        android:id="@+id/goButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_large"
-        android:background="@drawable/retry_connection_button_shape"
-        android:foreground="?attr/selectableItemBackground"
-        android:text="@string/next"
-        android:textColor="@color/white"
+    <FrameLayout
+        android:id="@+id/progressLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparentPrimary"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shoesIcon"/>
+        app:layout_constraintTop_toTopOf="parent">
 
-</android.support.constraint.ConstraintLayout>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+
+</FrameLayout>
